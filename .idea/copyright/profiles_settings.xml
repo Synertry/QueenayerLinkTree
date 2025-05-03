@@ -1,0 +1,7 @@
+<component name="CopyrightManager">
+  <settings default="Synertry BSL-1.0">
+    <module2copyright>
+      <element module="Golang" copyright="Synertry BSL-1.0" />
+    </module2copyright>
+  </settings>
+</component>
