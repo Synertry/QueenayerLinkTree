@@ -1,11 +1,26 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Color Hunt Palette */
+  --primary-bg: #C599B6; /* Primary color (most usage) */
+  --secondary-bg: #E6B2BA; /* Secondary color */
+  --tertiary-bg: #FAD0C4; /* Tertiary color */
+  --accent-color: #C599B6; /* Using primary for accent */
+  --text-color: #333; /* Slightly darker for better contrast */
+  --link-bg: #FFF7F3; /* Lightest color for backgrounds */
+  --link-hover-bg: #FAD0C4; /* Tertiary color for hover */
+  --link-border: #E6B2BA; /* Secondary color for borders */
+  --shadow-color: rgba(197, 153, 182, 0.5); /* Primary color shadow */
+
+  /* Petal Colors - Keep the gradient effect the user likes */
+  --petal-color-1: #c03d5e; /* Primary color - more red */
+  --petal-color-2: #ea98a8; /* Secondary color - more red */
+  --petal-color-3: #eccccb; /* Tertiary color - more red */
+
+  color: var(--text-color);
+  background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg), var(--tertiary-bg));
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,11 +30,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--accent-color);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #ff8fab; /* Darker pink on hover */
 }
 
 body {
@@ -31,8 +46,10 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 2.5em; /* Slightly smaller */
   line-height: 1.1;
+  color: var(--accent-color); /* Use accent for title */
+  margin-bottom: 1.5rem;
 }
 
 .card {
@@ -40,10 +57,16 @@ h1 {
 }
 
 #app {
-  max-width: 1280px;
+  max-width: 600px; /* Typical linktree width */
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center content vertically */
+  width: 100%; /* Ensure full width */
 }
 
 button {
@@ -53,27 +76,401 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #f9f9f9; /* Keep button distinct but light */
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--accent-color);
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.profile {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; /* Ensure profile is above petals */
+  z-index: 2;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  border: 3px solid var(--accent-color);
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.username {
+  font-size: 1.8em;
+  color: #333; /* Darker color for better readability */
+  margin-bottom: 0.5rem;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7); /* Add shadow for contrast */
+  font-weight: bold; /* Make text bolder */
+}
+
+.bio {
+  color: var(--text-color);
+  font-size: 0.9em;
+  max-width: 80%;
+  margin-bottom: 2rem;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 400px;
+  position: relative; /* Ensure links are above petals */
+  z-index: 2;
+  align-items: center; /* Center links horizontally */
+  margin: 0 auto; /* Center the container itself */
+}
+
+.link-button {
+  display: flex; /* Use flexbox for icon and text alignment */
+  align-items: center;
+  justify-content: center; /* Center content horizontally */
+  gap: 0.8rem; /* Space between icon and text */
+  background-color: var(--link-bg);
+  color: var(--text-color);
+  padding: 0.8rem 1.5rem; /* Adjust padding */
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 500;
+  border: 1px solid var(--link-border);
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  width: 100%; /* Ensure full width */
+}
+
+.link-button svg {
+  /* Icon inherits color, or set specific color */
+  /* color: var(--accent-color); */
+  flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+.link-button span {
+  /* Remove flex-grow to prevent text shifting */
+  text-align: center;
+  /* Add a fixed width to ensure consistent layout */
+  min-width: 80px;
+}
+
+.link-button:hover {
+  background-color: var(--link-hover-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.footer {
+  margin-top: 3rem;
+  font-size: 0.8em;
+  color: #333; /* Darker color for better readability */
+  position: relative; /* Ensure footer is above petals */
+  z-index: 2;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7); /* Add shadow for contrast */
+  font-weight: bold; /* Make text bolder */
+}
+
+.footer a {
+  color: #333; /* Darker color for better readability */
+  text-decoration: underline;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7); /* Add shadow for contrast */
+}
+
+.footer a:hover {
+  color: #E6B2BA; /* Secondary color on hover */
+}
+
+.petals-container {
+  position: fixed; /* Cover the whole viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none; /* Allow clicks through */
+  z-index: 1; /* Behind content */
+}
+
+/* Rose Petal Styles */
+.petal {
+  position: absolute;
+  top: -30px; /* Start above the screen */
+  width: 15px;
+  height: 15px;
+  background: linear-gradient(135deg, var(--petal-color-1), var(--petal-color-2)); /* Enhanced gradient */
+  border-radius: 15px 0; /* Rose petal shape */
+  opacity: 0.9; /* Increased opacity for visibility */
+  animation: fall linear infinite;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+  transform-origin: center;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle white border */
+}
+
+.petal:nth-child(5n + 1) {
+  background: linear-gradient(135deg, var(--petal-color-2), var(--petal-color-3)); /* Enhanced gradient */
+  animation-duration: calc(12s + var(--i) * 0.5s);
+  animation-delay: calc(var(--i) * 0.3s);
+  transform: rotate(-20deg);
+  width: 12px;
+  height: 12px;
+}
+
+.petal:nth-child(5n + 2) {
+  background: linear-gradient(135deg, var(--petal-color-3), var(--petal-color-1)); /* Enhanced gradient */
+  animation-duration: calc(15s + var(--i) * 0.4s);
+  animation-delay: calc(var(--i) * 0.5s);
+  transform: rotate(15deg);
+  width: 18px;
+  height: 18px;
+}
+
+.petal:nth-child(5n + 3) {
+  background: linear-gradient(135deg, var(--petal-color-1), var(--petal-color-2)); /* Enhanced gradient */
+  animation-duration: calc(10s + var(--i) * 0.6s);
+  animation-delay: calc(var(--i) * 0.2s);
+  transform: rotate(5deg);
+  width: 10px;
+  height: 10px;
+}
+
+.petal:nth-child(5n + 4) {
+  background: linear-gradient(135deg, var(--petal-color-2), var(--petal-color-1)); /* Enhanced gradient */
+  animation-duration: calc(14s + var(--i) * 0.3s);
+  animation-delay: calc(var(--i) * 0.4s);
+  transform: rotate(-10deg);
+  width: 14px;
+  height: 14px;
+}
+
+.petal:nth-child(5n + 5) {
+  background: linear-gradient(135deg, var(--petal-color-3), var(--petal-color-2)); /* Enhanced gradient */
+  animation-duration: calc(11s + var(--i) * 0.7s);
+  animation-delay: calc(var(--i) * 0.1s);
+  transform: rotate(25deg);
+  width: 16px;
+  height: 16px;
+}
+
+/* Petal colors remain consistent */
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg) translateX(0);
+    opacity: 0.7;
+    left: calc(var(--i) * 5%); /* Spread petals horizontally */
   }
-  a:hover {
-    color: #747bff;
+  20% {
+    transform: translateY(20vh) translateX(-20px) rotate(45deg);
   }
-  button {
-    background-color: #f9f9f9;
+  40% {
+    transform: translateY(40vh) translateX(15px) rotate(90deg);
+  }
+  60% {
+    transform: translateY(60vh) translateX(-15px) rotate(135deg);
+  }
+  80% {
+    transform: translateY(80vh) translateX(20px) rotate(180deg);
+  }
+  100% {
+    transform: translateY(105vh) rotate(225deg) translateX(0); /* Fall below screen */
+    opacity: 0;
+    left: calc(var(--i) * 5%); /* Fixed position without random */
+  }
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  #app {
+    padding: 1rem;
+    max-width: 100%;
+  }
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .username {
+    font-size: 1.5em;
+  }
+
+  .bio {
+    font-size: 0.85em;
+    max-width: 90%;
+  }
+
+  .links {
+    max-width: 90%;
+  }
+
+  .link-button {
+    padding: 0.7rem 1.2rem;
+  }
+
+  .footer {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .avatar {
+    width: 70px;
+    height: 70px;
+  }
+
+  .username {
+    font-size: 1.3em;
+  }
+
+  .bio {
+    font-size: 0.8em;
+  }
+
+  .link-button {
+    padding: 0.6rem 1rem;
+  }
+
+  .petal {
+    /* Smaller petals on mobile */
+    transform: scale(0.8);
+  }
+}
+
+/* No dark mode - using only pastel pink theme */
+
+/* Theme toggle styles */
+.theme-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--accent-color);
+  cursor: pointer;
+  z-index: 10;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--link-hover-bg);
+}
+
+/* Icon container styles */
+.icon-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5em;
+  height: 1.5em;
+  flex-shrink: 0;
+}
+
+/* Bunny styles */
+.bunny {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  z-index: 3;
+  pointer-events: none;
+  transition: transform 0.2s ease-out;
+  /* Add shadow for the bunny */
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.3));
+}
+
+.bunny.jumping {
+  animation: hop 1s ease-in-out;
+}
+
+.bunny-head {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+}
+
+.bunny-ears {
+  position: absolute;
+  top: 0;
+  left: 8px;
+  z-index: 1;
+}
+
+.bunny-ears::before, .bunny-ears::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 15px;
+  background-color: white;
+  border-radius: 6px 6px 0 0;
+}
+
+.bunny-ears::before {
+  left: 0;
+  transform: rotate(-10deg);
+}
+
+.bunny-ears::after {
+  left: 10px;
+  transform: rotate(10deg);
+}
+
+.bunny-body {
+  position: absolute;
+  width: 25px;
+  height: 15px;
+  background-color: white;
+  border-radius: 12px;
+  top: 25px;
+  left: 8px;
+}
+
+.bunny-tail {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: white;
+  border-radius: 50%;
+  top: 27px;
+  left: 2px;
+}
+
+/* Faster, more energetic hopping animation */
+@keyframes hop {
+  0% {
+    transform: translateY(0) scaleY(1);
+  }
+  10% {
+    transform: translateY(0) scaleY(0.85); /* Compress before jump - faster */
+  }
+  35% {
+    transform: translateY(-30px) scaleY(1.15); /* Stretch at peak - higher jump */
+  }
+  60% {
+    transform: translateY(-10px) scaleY(1); /* Start falling - faster descent */
+  }
+  80% {
+    transform: translateY(0) scaleY(0.9); /* Compress on landing */
+  }
+  100% {
+    transform: translateY(0) scaleY(1); /* Return to normal */
   }
 }

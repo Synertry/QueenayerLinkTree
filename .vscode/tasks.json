@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Vite Build Watch (web)",
+      "type": "shell",
+      "command": "pnpm",
+      "args": [
+        "--filter",
+        "./web",
+        "run",
+        "build",
+        "--watch"
+      ],
+      "isBackground": true,
+      "problemMatcher": [
+        "$tsc-watch"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    }
+  ]
+}
