@@ -1,3 +1,3 @@
 <component name="DependencyValidationManager">
-  <scope name="Golang" pattern="file:*.go*||file:*yaml" />
+  <scope name="Golang" pattern="(file:*.go*||file:*yaml)&amp;&amp;!file:web//*&amp;&amp;!file:scripts/.make/*&amp;&amp;!file:bin/*" />
 </component>

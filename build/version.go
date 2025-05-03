@@ -6,7 +6,7 @@
  *           https://www.boost.org/LICENSE_1_0.txt)
  */
 
-package build
+package Build
 
 var (
 	App       string

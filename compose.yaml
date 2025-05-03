@@ -1,0 +1,16 @@
+services:
+    website:
+        image: alpine:${ALPINE_VERSION:-latest}
+        container_name: ${NAME_LC}
+        hostname: ${NAME_LC}
+        restart: unless-stopped
+        ports:
+            - ${SERVER_PORT}:${SERVER_PORT}
+        extra_hosts:
+            - host.docker.internal:host-gateway
+        volumes:
+#            - ./tls:/opt/${NAME_LC}/tls:ro
+            - ./web:/opt/${NAME_LC}/web
+            - ./${BUILD_DIR:-./bin}/linux-amd64/${NAME_LC}:/opt/${NAME_LC}/server
+        working_dir: /opt/${NAME_LC}
+        command: ./server serve --port '${SERVER_PORT}'

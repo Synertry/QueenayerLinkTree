@@ -223,14 +223,17 @@ $RECYCLE.BIN/
 ### Project specific ignore ###
 
 # Project credentials
-.env
+*.env
+
+# Allow template files
+!*.tmpl
 
 # Ignore all files in the archive directory
 archive/
 
 # Buildsystem Makefiles
 Makefile
-.make
+scripts/.make
 
 # Compiled files
 [Bb]in/
@@ -238,3 +241,6 @@ Makefile
 # Logging
 [Ll]ogs/
 *.log
+
+# Temporary files
+artefacts/
