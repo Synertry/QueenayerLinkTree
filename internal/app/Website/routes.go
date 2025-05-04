@@ -38,10 +38,10 @@ func routes() *http.ServeMux {
 	mux.Handle("GET /assets/", fileServer)
 
 	// Serve the main page (index.html) at the root URL
-	mux.Handle("GET /", fileServer)
+	mux.Handle("GET /{$}", http.FileServerFS(dist))
 
 	// additional handler which redirects to each social media link
-	mux.HandleFunc("GET /{social}", social)
+	mux.HandleFunc("GET /{path}", pathServe)
 
 	return mux
 }
