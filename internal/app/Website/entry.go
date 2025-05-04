@@ -48,7 +48,7 @@ func Serve(port int, embed *embed.FS) (err error) {
 			if os.WriteFile(Build.App+"-crash.log", []byte(fmt.Sprintf("%v", rec)), 0666) != nil {
 				log.Fatalf("Failed to create %s-crash.log", Build.App)
 			}
-			Logger.Out.Error("Application crashed, check %s-crash.log in same directory.\n", Build.App)
+			Logger.Out.Error(fmt.Sprintf("Application crashed, check %s-crash.log in same directory.\n", Build.App))
 		}
 	}()
 
