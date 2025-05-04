@@ -109,6 +109,8 @@ button:focus-visible {
   margin-bottom: 1rem;
   border: 3px solid var(--accent-color);
   box-shadow: 0 4px 8px var(--shadow-color);
+  position: relative;
+  z-index: 0;
 }
 
 .username {
@@ -406,97 +408,130 @@ button:focus-visible {
   flex-shrink: 0;
 }
 
-/* Bunny styles */
-.bunny {
-  position: fixed;
-  width: 40px;
-  height: 40px;
-  z-index: 3;
-  pointer-events: none;
-  transition: transform 0.2s ease-out;
-  /* Add shadow for the bunny */
-  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.3));
+/* Bunny styles moved to Bunny.svelte component */
+
+/* Avatar container and decoration styles */
+.avatar-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
 }
 
-.bunny.jumping {
-  animation: hop 1s ease-in-out;
-}
-
-.bunny-head {
+.avatar-deco {
   position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: white;
-  border-radius: 50%;
-  top: 10px;
-  left: 10px;
-  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  width: 130px;
+  height: 130px;
+  z-index: 1;
+  transition: filter 0.3s ease;
 }
 
-.bunny-ears {
+.avatar-proxy-link {
   position: absolute;
   top: 0;
-  left: 8px;
-  z-index: 1;
-}
-
-.bunny-ears::before, .bunny-ears::after {
-  content: '';
-  position: absolute;
-  width: 6px;
-  height: 15px;
-  background-color: white;
-  border-radius: 6px 6px 0 0;
-}
-
-.bunny-ears::before {
   left: 0;
-  transform: rotate(-10deg);
+  width: 100%;
+  height: 100%;
+  z-index: 2; /* Above both avatar (0) and decoration (1) */
 }
 
-.bunny-ears::after {
-  left: 10px;
-  transform: rotate(10deg);
-}
-
-.bunny-body {
-  position: absolute;
-  width: 25px;
-  height: 15px;
-  background-color: white;
-  border-radius: 12px;
-  top: 25px;
-  left: 8px;
-}
-
-.bunny-tail {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background-color: white;
+.avatar-proxy {
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  top: 27px;
-  left: 2px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: box-shadow 0.3s ease;
 }
 
-/* Faster, more energetic hopping animation */
-@keyframes hop {
-  0% {
-    transform: translateY(0) scaleY(1);
+.avatar-proxy-link:hover .avatar-proxy {
+  box-shadow: 0 0 15px 5px rgba(197, 153, 182, 0.7); /* Glow effect using primary color */
+}
+
+.avatar-deco-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Same as decoration */
+}
+
+.avatar-deco-link:hover .avatar-deco {
+  filter: drop-shadow(0 0 8px rgba(230, 178, 186, 0.8)); /* Glow effect using secondary color */
+}
+
+/* Media queries for responsive avatar decoration */
+@media (max-width: 768px) {
+  .avatar-deco {
+    width: 104px;
+    height: 104px;
+    top: 48%; /* Use absolute positioning instead of percentage-based */
+    transform: translate(-50%, -55%); /* Adjusted to prevent 2px cut into the image */
   }
-  10% {
-    transform: translateY(0) scaleY(0.85); /* Compress before jump - faster */
+
+  .avatar-proxy {
+    width: 80px;
+    height: 80px;
   }
-  35% {
-    transform: translateY(-30px) scaleY(1.15); /* Stretch at peak - higher jump */
+}
+
+@media (max-width: 480px) {
+  .avatar-deco {
+    /* Change approach for small screens */
+    width: 85px; /* Slightly smaller than 130% of avatar size */
+    height: 85px;
+    top: -5%; /* Use absolute positioning instead of percentage-based */
+    left: 50%;
+    transform: translateX(-50%); /* Only transform X, not Y */
   }
-  60% {
-    transform: translateY(-10px) scaleY(1); /* Start falling - faster descent */
+
+  .avatar-proxy {
+    width: 70px;
+    height: 70px;
   }
-  80% {
-    transform: translateY(0) scaleY(0.9); /* Compress on landing */
+}
+
+/* Mascot styling */
+.mascot-container {
+  position: relative;
+  z-index: 3; /* Above other elements */
+}
+
+.mascot-link {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 3; /* Same as mascot */
+  display: block;
+  width: 120px;
+  height: auto;
+}
+
+/* Tablet view for mascot link */
+@media (max-width: 768px) {
+  .mascot-link {
+    width: 100px;
+    bottom: 15px;
+    right: 15px;
   }
-  100% {
-    transform: translateY(0) scaleY(1); /* Return to normal */
+}
+
+/* Mobile view for mascot link */
+@media (max-width: 480px) {
+  .mascot-link {
+    width: 80px;
+    bottom: 10px;
+    right: 10px;
   }
+}
+
+.mascot {
+  width: 100%;
+  height: auto;
+  display: block;
 }
