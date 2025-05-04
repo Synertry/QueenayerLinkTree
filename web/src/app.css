@@ -19,6 +19,11 @@
   --petal-color-2: #ea98a8; /* Secondary color - more red */
   --petal-color-3: #eccccb; /* Tertiary color - more red */
 
+  /* Username Gradient Colors */
+  --username-grad-1: #A888B5;
+  --username-grad-2: #8174A0;
+  --username-grad-3: #441752;
+
   color: var(--text-color);
   background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg), var(--tertiary-bg));
 
@@ -107,11 +112,18 @@ button:focus-visible {
 }
 
 .username {
-  font-size: 1.8em;
-  color: #333; /* Darker color for better readability */
+  font-size: 2.2em; /* Slightly larger for more impact */
   margin-bottom: 0.5rem;
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7); /* Add shadow for contrast */
-  font-weight: bold; /* Make text bolder */
+  font-weight: bold;
+  /* Gradient Setup */
+  background: linear-gradient(90deg, var(--username-grad-1), var(--username-grad-2), var(--username-grad-3), var(--username-grad-2), var(--username-grad-1));
+  background-size: 200% 100%; /* Make gradient wider than element for movement */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; /* Hide original text color */
+  /* Pulsating Animation */
+  animation: pulseGradient 4s ease-in-out infinite;
+  text-shadow: none; /* Remove previous shadow if it interferes */
 }
 
 .bio {
@@ -119,6 +131,7 @@ button:focus-visible {
   font-size: 0.9em;
   max-width: 80%;
   margin-bottom: 2rem;
+  font-weight: bold;
 }
 
 .links {
@@ -170,7 +183,7 @@ button:focus-visible {
 }
 
 .footer {
-  margin-top: 3rem;
+  margin-top: 4rem;
   font-size: 0.8em;
   color: #333; /* Darker color for better readability */
   position: relative; /* Ensure footer is above petals */
@@ -187,7 +200,7 @@ button:focus-visible {
 }
 
 .footer a:hover {
-  color: #E6B2BA; /* Secondary color on hover */
+  color: #A888B5; /* Secondary color on hover */
 }
 
 .petals-container {
@@ -285,6 +298,19 @@ button:focus-visible {
     transform: translateY(105vh) rotate(225deg) translateX(0); /* Fall below screen */
     opacity: 0;
     left: calc(var(--i) * 5%); /* Fixed position without random */
+  }
+}
+
+/* Pulsating Gradient Animation */
+@keyframes pulseGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 

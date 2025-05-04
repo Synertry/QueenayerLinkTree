@@ -1,20 +1,27 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import Icon from '@iconify/svelte';
+  import { onMount } from 'svelte';
 
   // Use static image from Twitter
   let profilePic = "https://pbs.twimg.com/media/GjL4pgDa8AAnvgd?format=jpg&name=large";
 
   // No dark mode - using only pastel pink theme
 
+  // multiline string for the bio
+  const bio = `
+    ✨ Battling Honkai, exploring Miraland, and being fabulous the Rift
+    ~ Miss Pink Elf♪!
+  `;
+
+
   // Social media links with actual URLs
   const links = [
-    { name: 'Discord', url: 'https://discord.com/users/402581006185660423', icon: 'simple-icons:discord' },
-    { name: 'Steam', url: 'https://steamcommunity.com/profiles/76561199206914943', icon: 'simple-icons:steam' },
-    { name: 'Twitter', url: 'https://x.com/QueenAyer', icon: 'simple-icons:x' },
-    { name: 'Reddit', url: 'https://www.reddit.com/u/QueenAyer', icon: 'simple-icons:reddit' },
-    { name: 'Youtube', url: 'https://www.youtube.com/@queenayer2671', icon: 'simple-icons:youtube' },
-    { name: 'Twitch', url: 'https://www.twitch.tv/queenayer', icon: 'simple-icons:twitch' },
+    { name: 'Discord', url: '/discord', icon: 'simple-icons:discord' },
+    { name: 'Steam', url: '/steam', icon: 'simple-icons:steam' },
+    { name: 'Twitter', url: '/x', icon: 'simple-icons:x' },
+    { name: 'Reddit', url: '/reddit', icon: 'simple-icons:reddit' },
+    { name: 'Youtube', url: '/youtube', icon: 'simple-icons:youtube' },
+    { name: 'Twitch', url: '/twitch', icon: 'simple-icons:twitch' },
   ];
 
   // Bunny position state
@@ -111,9 +118,11 @@
   </div>
 
   <div class="profile">
-    <img src={profilePic} alt="Queenayer Avatar" class="avatar" />
-    <h1 class="username">@Queenayer</h1>
-    <p class="bio">Polish Weeb ✨ Exploring Teyvat, battling Honkai, and dominating the Rift~ Kocham Hoyoverse i League of Legends! ♡</p>
+    <a href={profilePic} target="_blank" rel="noopener noreferrer" class="avatar-link">
+      <img src={profilePic} alt="Queenayer Avatar" class="avatar" />
+    </a>
+    <h1 class="username">Queenayer</h1>
+    <p class="bio">{bio}</p>
   </div>
 
   <div class="links">
@@ -128,7 +137,7 @@
   </div>
 
   <footer class="footer">
-    Made with ❤️ by <a href="http://synertry.me" target="_blank" rel="noopener noreferrer">Synertry</a>
+    Made with ❤️ by <a href="synertry" target="_blank" rel="noopener noreferrer">Synertry</a>
   </footer>
 </main>
 
