@@ -10,10 +10,11 @@ package Website
 
 import (
 	"embed"
-	"github.com/Synertry/GoSysUtils/Math"
-	"github.com/Synertry/QueenayerLinkTree/internal/pkg/Logger"
 	"log/slog"
 	"net/http"
+
+	"github.com/Synertry/GoSysUtils/Math"
+	"github.com/Synertry/QueenayerLinkTree/internal/pkg/Logger"
 )
 
 //go:embed httpStatusNotFound.html

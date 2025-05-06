@@ -21,5 +21,13 @@ export default defineConfig({
     outDir: 'dist',
     // Generate a manifest for potential asset fingerprinting
     manifest: true,
+
+    target: 'esnext',
+    cssTarget: 'esnext',
+    cssMinify: "lightningcss"
   },
+
+  css: {
+    transformer: "lightningcss"
+  }
 })

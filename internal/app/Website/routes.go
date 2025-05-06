@@ -8,9 +8,7 @@
 
 package Website
 
-import (
-	"net/http"
-)
+import "net/http"
 
 // routes defines and configures all HTTP routes for the application.
 // It creates a new ServeMux and sets up handlers for serving static files
@@ -38,10 +36,12 @@ func routes() *http.ServeMux {
 	mux.Handle("GET /assets/", fileServer)
 
 	// Serve the main page (index.html) at the root URL
-	mux.Handle("GET /{$}", http.FileServerFS(dist))
+	mux.Handle("GET /{$}", fileServer)
 
 	// additional handler which redirects to each social media link
-	mux.HandleFunc("GET /{path}", pathServe)
+	mux.HandleFunc("GET /{path}", func(w http.ResponseWriter, r *http.Request) {
+		http.HandlerFunc(pathServe).ServeHTTP(w, r)
+	})
 
 	return mux
 }

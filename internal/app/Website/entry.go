@@ -72,7 +72,9 @@ func Serve(port int, embed *embed.FS) (err error) {
 
 	// Start the HTTP server with the configured routes
 	Logger.Out.Info("Starting website server", slog.Int("port", port))
-	err = http.ListenAndServe(fmt.Sprintf(":%d", port), routes())
+
+	mux := logRequest(routes()) // Wrap the routes with the logging middleware
+	err = http.ListenAndServe(fmt.Sprintf(":%d", port), mux)
 	if err != nil {
 		Logger.Out.Error("Failed to start website server", slog.String("error", err.Error()))
 	}
